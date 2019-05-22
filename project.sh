@@ -8,7 +8,7 @@ do
 
 read -p "intput :" np
 
-#¿é¤J¬°exit®É¸õ¥X
+#è¼¸å…¥ç‚ºexitæ™‚è·³å‡º
 if [[ $np == "exit" ]]; then
 exit 0
 fi
@@ -16,12 +16,12 @@ fi
 u=1
 
 #+-*/
-#ª½±µ«öenter®É¶i¤J¤@¯ë¹Bºâ
+#ç›´æ¥æŒ‰enteræ™‚é€²å…¥ä¸€èˆ¬é‹ç®—
 if [[ $np == "" ]]; then
 read -p "intput +-*/ :" nn
 echo "+-*/ $nn = "
 echo "scale=5;$nn" | bc
-#Âà¶i¦ì¼Æ
+#è½‰é€²ä½æ•¸
 echo "obase=6;$nn" | bc
 
 else 
@@ -29,7 +29,7 @@ else
 filename2=$(date +%Y-%m-%d-%H:%M:%S)
 echo "n! time  $filename2"
 #filename2=$(date +%s -d $filename2)
-#n!¹Bºâ
+#n!é‹ç®—
 for((i=1; i<=${np}; i=i+1))
 do 
 u=$u*$i
@@ -39,13 +39,13 @@ done
 echo "$np!="
 echo "$u" |bc
 filename=$(date +%Y-%m-%d-%H:%M:%S)
-#filename=$(date +%s -d $filename2)
+
 #filename1=$(($filename-$filename2))
 #filename1=$(date +%Y-%m-%d-%H:%M:%S -d "1970-01-01 UTC $filename1 seconds")
 
 echo "$filename"
 
-#fib num ¹Bºâ
+#fib num é‹ç®—
 n0=0
 n1=1
 filename2=$(date +%Y-%m-%d-%H:%M:%S)
@@ -67,7 +67,7 @@ echo "$filename"
 
 filename2=$(date +%Y-%m-%d-%H:%M:%S)
 echo "root  time  $filename2"
-#squre root ¥­¤è®Ú¹Bºâ
+#squre root å¹³æ–¹æ ¹é‹ç®—
 echo "square root $np = "
 echo "scale=5;sqrt($np)" | bc
 filename=$(date +%Y-%m-%d-%H:%M:%S)
