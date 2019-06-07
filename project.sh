@@ -1,91 +1,100 @@
 #!/bin/bash
 #program:
 
-
 while [ true ]
-
 do
+echo "Please press the number to choose mode: "
+echo "1. Elementary arithmetic "
+echo "2. Square root "
+echo "3. Positional notation "
+echo "4. Factorial "
+echo "5. Fibonacci "
+echo "*****press \"exit\" if you are done!*****"
 
-read -p "intput :" np
+read -p "Mode :" mode
 
-#輸入為exit時跳出
-if [[ $np == "exit" ]]; then
+
+#exit when end the program
+if [ $mode == "exit" ]; then
 exit 0
 fi
 
-u=1
 
-#+-*/
-#直接按enter時進入一般運算
-if [[ $np == "" ]]; then
-read -p "intput +-*/ :" nn
-echo "+-*/ $nn = "
-echo "scale=5;$nn" | bc
-#轉進位數
-echo "obase=6;$nn" | bc
+#Elementary arithmetic + - * / ^
+if [ $mode == "1" ]; then
 
-else 
+read -p "Arithmetic: " ari
+echo "Arithmetic( $ari ) = "
+echo "scale=4;$ari" | bc
 
-filename2=$(date +%Y-%m-%d-%H:%M:%S)
-echo "n! time  $filename2"
-#filename2=$(date +%s -d $filename2)
-#n!運算
-for((i=1; i<=${np}; i=i+1))
-do 
-u=$u*$i
- 
 
+#Squre root 
+elif [ $mode == "2" ]; then
+read -p "Your number is: " squNum
+echo "Square root of ( $squNum ) = "
+echo "scale=4;sqrt($squNum)" | bc
+
+
+#Positional notation
+elif [ $mode == "3" ]; then
+echo "Choose From decimal or To decimal " 
+echo "1. From decimal "
+echo "2. To decimal "
+read -p "choose: " pos
+read -p "Your number: " num
+
+if [ $pos == "1" ];then		#choose to transform number from decimal
+echo "Your number in Binary is: "
+echo "obase=2;$num" | bc
+echo "Your number in Octal is: "
+echo "obase=8;$num" | bc
+echo "Your number in Hexadecimal is: "
+echo "obase=16;$num" | bc
+
+elif [ $pos == "2" ];then	#choose to transform number to decimal
+read -p "Original position is: " oriPos
+echo "Your number in Decimal is: "
+if [ $oriPos == "2" ];then
+echo "ibase=2;$num" | bc
+elif [ $oriPos == "8" ];then
+echo "ibase=8;$num" | bc
+elif [ $oriPos == "16" ];then
+echo "ibase=16;$num" | bc
+fi	#end of choosing oriPos
+fi	#end of choosing pos
+
+
+#Factorial
+elif [ $mode == "4" ]; then
+read -p "Please Input your number: " facNum
+racResult=1			
+for(( i=1; i<=${facNum}; i=i+1 )) 
+do 				#evaluating the result
+racResult=$racResult*$i
 done
-echo "$np!="
-echo "$u" |bc
-filename=$(date +%Y-%m-%d-%H:%M:%S)
 
-#filename1=$(($filename-$filename2))
-#filename1=$(date +%Y-%m-%d-%H:%M:%S -d "1970-01-01 UTC $filename1 seconds")
+echo "Factorial of ( $facNum ) = $facNum! = "
+echo "$racResult" |bc
 
-echo "$filename"
 
-#fib num 運算
-n0=0
-n1=1
-filename2=$(date +%Y-%m-%d-%H:%M:%S)
-echo "fib time   $filename2"
-for((i=2; i<=${np}; i=i+1))
-do
-
-u=`echo "${n0}+${n1}"| bc`
-
-n0=$n1
-n1=$u
-
+#Fibonacci
+elif [ $mode == "5" ]; then
+read -p "Please Input your number: " fibNum
+f0=0
+f1=1
+for(( i=2; i<=${fibNum}; i=i+1))
+do				#evaluating the result
+fib=`echo "${f0}+${f1}"| bc`
+f0=$f1
+f1=$fib
 done
 
-echo "fib $np = $u" 
-filename=$(date +%Y-%m-%d-%H:%M:%S)
-#filename1=$(($filename-$filename2))
-echo "$filename"
-
-filename2=$(date +%Y-%m-%d-%H:%M:%S)
-echo "root  time  $filename2"
-#squre root 平方根運算
-echo "square root $np = "
-echo "scale=5;sqrt($np)" | bc
-filename=$(date +%Y-%m-%d-%H:%M:%S)
-#filename1=$(($filename-$filename2))
-echo "$filename"
+echo "Fibonacci of ( $fibNum ) = $fib" 
 fi
 
 
-
+echo ""
+echo "---------------------------------------------"
 done
 
-
-
-exit 0
-
-
-
-
-
-
-
+exit 
