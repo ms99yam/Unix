@@ -11,7 +11,7 @@ echo "4. Factorial "
 echo "5. Fibonacci "
 echo "*****press \"exit\" if you are done!*****"
 
-read -p "Mode :" mode
+read -p "Mode: " mode
 
 
 #exit when end the program
@@ -88,11 +88,15 @@ fib=`echo "${f0}+${f1}"| bc`
 f0=$f1
 f1=$fib
 done
-
+if [ $fibNum == "0" ];then
+echo "Fibonacci of ( $fibNum ) = $f0"
+elif [ $fibNum == "1" ];then
+echo "Fibonacci of ( $fibNum ) = $f1"
+else
 echo "Fibonacci of ( $fibNum ) = $fib" 
 fi
 
-
+fi
 echo ""
 echo "---------------------------------------------"
 done
